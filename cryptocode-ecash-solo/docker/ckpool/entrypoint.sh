@@ -27,7 +27,7 @@ rpc() {
 while :; do
     OUT=$(rpc getblockchaininfo || true)
     if [ -n "$OUT" ]; then
-        IBD=$(echo "$OUT" | jq -r '.result.initialblockdownload // empty' 2>/dev/null || true)
+        IBD=$(echo "$OUT" | jq -r '.result.initialblockdownload' 2>/dev/null || true)
         PROG=$(echo "$OUT" | jq -r '(.result.verificationprogress // 0) * 100 | floor' 2>/dev/null || echo 0)
         BLK=$(echo "$OUT" | jq -r '.result.blocks // 0' 2>/dev/null || echo 0)
         if [ "$IBD" = "false" ]; then
