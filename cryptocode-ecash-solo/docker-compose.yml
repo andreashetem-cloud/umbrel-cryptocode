@@ -1,0 +1,50 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: cryptocode-ecash-solo_dashboard_1
+      APP_PORT: 3000
+
+  # ---------------------------------------------------------------- eCash node
+  node:
+    image: ghcr.io/andreashetem-cloud/ecash-abc:0.33.9
+    # Na de eerste build: plak hier @sha256:<digest> achter de tag.
+    restart: on-failure
+    stop_grace_period: 10m
+    ports:
+      - "8433:8433" # P2P. Forward deze poort in je router voor inbound peers.
+    volumes:
+      - ${APP_DATA_DIR}/data/abc:/data
+    environment:
+      # 0 = volledige chain. Anders MiB, bv. 20000 voor een 20 GB pruned node.
+      ABC_PRUNE: "0"
+      ABC_DBCACHE: "2000"
+
+  # ------------------------------------------------------- solo stratum server
+  ckpool:
+    image: ghcr.io/andreashetem-cloud/ecash-ckpool:pr11
+    restart: on-failure
+    depends_on:
+      - node
+    ports:
+      - "3333:3333" # stratum. Hier wijs je je miners naartoe.
+    volumes:
+      - ${APP_DATA_DIR}/data/abc:/abc:ro
+      - ${APP_DATA_DIR}/data/ckpool:/ckpool
+    environment:
+      CK_BTCSIG: "/cryptocode solo/"
+      CK_DONATION: "0.0" # % naar de ckpool-auteur. 0.0 = alles voor jou.
+      CK_STARTDIFF: "1000"
+      CK_MINDIFF: "100"
+
+  # ----------------------------------------------------------------- dashboard
+  dashboard:
+    image: ghcr.io/andreashetem-cloud/ecash-dashboard:1.0.0
+    restart: on-failure
+    depends_on:
+      - ckpool
+    volumes:
+      - ${APP_DATA_DIR}/data/abc:/abc:ro
+      - ${APP_DATA_DIR}/data/ckpool:/ckpool:ro
+    environment:
+      # Wordt alleen getoond als hint in het dashboard.
+      STRATUM_HINT: "${DEVICE_DOMAIN_NAME:-umbrel.local}:3333"

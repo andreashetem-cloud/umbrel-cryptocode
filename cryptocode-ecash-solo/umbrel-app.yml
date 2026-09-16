@@ -1,0 +1,41 @@
+manifestVersion: 1
+id: cryptocode-ecash-solo
+category: bitcoin
+name: eCash Solo Mining
+version: "0.33.9"
+tagline: Volledige eCash node + eigen solo stratum voor je ASICs
+description: >-
+  Draait een volledige Bitcoin ABC (eCash / XEC) node én de officiële
+  ecash-ckpool-solo stratum server op je Umbrel.
+
+
+  Je miners (Bitaxe, Nexus, Avalon, ...) verbinden rechtstreeks met je eigen
+  machine op poort 3333. Vind je een blok, dan gaat de volledige miner-portie
+  (58% van de coinbase) direct naar jouw eigen adres — geen pool, geen fee,
+  geen derde partij die je template bouwt.
+
+
+  De coinbase voldoet automatisch aan alle drie de verplichte eCash-regels:
+  miner fund output (32%), staking reward output (10%) en het Real Time Target
+  (Heartbeat). Blokken die één van deze regels missen worden door de Avalanche
+  consensus-laag verworpen.
+
+
+  Poorten: 3333 (stratum, LAN) en 8433 (P2P, optioneel port-forwarden voor
+  betere connectiviteit).
+releaseNotes: >-
+  Eerste versie. Bitcoin ABC 0.33.7 + ecash-ckpool-solo (commit 18b38ad) +
+  eigen statusdashboard.
+developer: Andreas Hetem
+website: https://cryptocodes.eu
+dependencies: []
+repo: https://github.com/Bitcoin-ABC/ecash-ckpool-solo
+support: https://t.me/eCashNode
+port: 3036
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Andreas Hetem
+submission: https://cryptocodes.eu
