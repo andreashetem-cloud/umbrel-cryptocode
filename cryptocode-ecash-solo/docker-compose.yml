@@ -6,7 +6,7 @@ services:
 
   # ---------------------------------------------------------------- eCash node
   node:
-    image: ghcr.io/andreashetem-cloud/ecash-abc:0.33.9@sha256:4789077e14908ed4e70b92b9243c3d976887735b6bf25dfd46ebfc2645adbe76
+    image: ghcr.io/andreashetem-cloud/ecash-abc:0.33.9@sha256:d141c8b8ec4c828cf429d2058e9e9063b5df31f826a6e412db4d6f39460c1e80
     # Na de eerste build: plak hier @sha256:<digest> achter de tag.
     restart: on-failure
     stop_grace_period: 10m
@@ -21,7 +21,7 @@ services:
 
   # ------------------------------------------------------- solo stratum server
   ckpool:
-    image: ghcr.io/andreashetem-cloud/ecash-ckpool:pr11@sha256:44a342a3f4e219ff17f7cc0ff62c6f66f3b1cdb3d7484fc266215d79efa7867a
+    image: ghcr.io/andreashetem-cloud/ecash-ckpool:pr11@sha256:3aba5af47f72589ccdbeb91c10a528465581d2d3de36558147eea48c14d4be3e
     restart: on-failure
     depends_on:
       - node
@@ -38,7 +38,7 @@ services:
 
   # ----------------------------------------------------------------- dashboard
   dashboard:
-    image: ghcr.io/andreashetem-cloud/ecash-dashboard:1.0.0@sha256:81d532f350cc21614eb93d02d8a9ef32433359eb2f381b394a5a07cf062c65b5
+    image: ghcr.io/andreashetem-cloud/ecash-dashboard:1.0.0@sha256:7cc7bab7b9cb864bc22961ea5f04e28749ecd0ce85492c900d944d439c6cf89c
     restart: on-failure
     depends_on:
       - ckpool
