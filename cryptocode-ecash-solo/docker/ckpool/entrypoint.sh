@@ -67,6 +67,12 @@ cat > "$CK/ckpool.conf" <<EOF
 }
 EOF
 
+# Oude socket van een vorige run opruimen. Zonder dit weigert ckpool te starten
+# ("Process main pid 1 still exists"), en -k is geen optie: killold richt zich
+# op pid 1, wat in een container het proces zelf is.
+rm -rf "$CK/sock"
+mkdir -p "$CK/sock"
+
 chown -R 1000:1000 "$CK"
 
 # -B = btcsolo (miner-username is het uitbetaaladres), -x = eCash-regels,
