@@ -21,7 +21,7 @@ services:
 
   # ------------------------------------------------------- solo stratum server
   ckpool:
-    image: ghcr.io/andreashetem-cloud/ecash-ckpool:pr11@sha256:3aba5af47f72589ccdbeb91c10a528465581d2d3de36558147eea48c14d4be3e
+    image: ghcr.io/andreashetem-cloud/ecash-ckpool:pr11@sha256:a27bd30edcb9a9ff72d72b0fb707c5d93e26f6d08afe7fff3d0a6b095bd4211d
     restart: on-failure
     depends_on:
       - node
