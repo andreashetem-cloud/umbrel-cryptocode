@@ -119,11 +119,18 @@ function fmtDuration(sec) {
 // --------------------------------------------------------------- status API
 async function status() {
   const pool = poolStatus();
+  // ckpool schrijft alleen workers/ als de miner een .workernaam meestuurt.
+  // Zonder die naam staat alles in users/ - val daar dan op terug.
+  let wk = workers();
+  const us = users();
+  if (wk.length === 0 && us.length > 0) {
+    wk = us.map((u) => ({ ...u, worker: u.address }));
+  }
   const res = {
     ts: Date.now(),
     pool,
-    workers: workers(),
-    users: users(),
+    workers: wk,
+    users: us,
     stratum: STRATUM_HINT,
     node: { ok: false },
   };
