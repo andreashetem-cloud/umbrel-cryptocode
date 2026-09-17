@@ -17,7 +17,7 @@ services:
     environment:
       # 0 = volledige chain. Anders MiB, bv. 20000 voor een 20 GB pruned node.
       ABC_PRUNE: "0"
-      ABC_DBCACHE: "2000"
+      ABC_DBCACHE: "450"
 
   # ------------------------------------------------------- solo stratum server
   ckpool:
