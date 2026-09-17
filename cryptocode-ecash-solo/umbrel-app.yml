@@ -1,6 +1,7 @@
 manifestVersion: 1
 id: cryptocode-ecash-solo
 category: bitcoin
+icon: https://raw.githubusercontent.com/andreashetem-cloud/umbrel-cryptocode/master/cryptocode-ecash-solo/icon.svg
 name: eCash Solo Mining
 version: "0.33.9"
 tagline: Volledige eCash node + eigen solo stratum voor je ASICs
