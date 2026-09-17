@@ -72,4 +72,4 @@ chown -R 1000:1000 "$CK"
 # -B = btcsolo (miner-username is het uitbetaaladres), -x = eCash-regels,
 # -k = oude socket opruimen na een herstart.
 exec setpriv --reuid=1000 --regid=1000 --clear-groups \
-    ckpool -B -x -k -c "$CK/ckpool.conf" -s "$CK/sock" -l 5
+    ckpool -B -x -c "$CK/ckpool.conf" -s "$CK/sock" -l 5
